@@ -1,0 +1,13 @@
+
+
+                
+
+
+
+    {
+        "dbuser":"dokku-postgres-esvdatabase",
+        "dbpass":"6b43ea3364ad33d6dc5297612d93a796",
+        "dbserver":"157.245.251.134",
+        "dbname":"esvdatabas",
+        "dbport":5432
+    }

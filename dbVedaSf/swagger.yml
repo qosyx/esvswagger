@@ -1,0 +1,815 @@
+swagger: "2.0"
+info:
+  description: This swagger described the operation of the APIs 
+  title: Swagger REST VEDA-BE
+  version: "1.0.0"
+  contact:
+    email: "jeanbaptiste.gandonou@imsp-uac.org"
+  license:
+    name: "Institut de Mathématique de Science Physique"
+    url: "contact@imsp-uac.org"
+  
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /vedaTable:
+    get:
+      operationId: vedatable.getTable
+      tags:
+        - vedaTable
+      summary: Get  veda table
+      description: Get  veda table
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              codeoftable:
+                type: string
+                description: String to generate table
+              description:
+                type: string
+                description: description of table
+              idvedatable:
+                type: string
+                description: veda id table            
+              importid:
+                type: string
+                description: Dabase id      
+              nom:
+                type: string
+                description: Name of veda table        
+
+#
+  /esvTemplate:
+    post:
+      operationId: esvTemplate.saveTemplate
+      tags:
+        - esvTemplate
+      summary: Save  esv Template
+      description: Save esv Template
+      parameters:
+        - name: myTemplateRequest
+          in: body
+          description: create es template
+          schema:
+            type: object
+            properties:
+              templatedescription:
+                type: string
+                description: esv template description
+              templatename:
+                type: string
+                description: esv template name
+              grouptemplate:
+                type: array
+                description: esv template
+
+      responses:
+        200:
+          description: Successfully to save template
+          schema:
+            properties:
+              templatename:
+                type: string
+                description: esv template name
+
+
+  /esvTemplate/getTemplate:
+    get:
+      operationId: esvTemplate.getTemplate
+      tags:
+        - esvTemplate
+      summary: Get  esv Template
+      description: Get  esv Template
+      responses:
+        201:
+          description: Successfully to get esv template
+          schema:
+            properties:
+              templatedescription:
+                type: string
+                description: esv template description
+              templatename:
+                type: string
+                description: esv template name
+              grouptemplate:
+                type: string
+                description: esv template
+    
+  #
+
+
+  /vedaTable/{codeoftable}:
+    post:
+      operationId: vedatable.saveTable
+      tags:
+        - vedaTable
+      summary: Save  veda table
+      description: Save  veda table
+      parameters:
+        - name: codeoftable
+          in: path
+          description: codeoftable
+          type: string
+          required: True
+        - name: myTableRequest
+          in: body
+          description: vedafile to create veda db
+          schema:
+            type: object
+            properties:
+              nom:
+                type: string
+                description: nom vedatable
+              importid:
+                type: integer
+                description: importid of resultat
+              description:
+                type: string
+                description: description of table
+
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+  /dbvedasf:
+    post:
+      operationId: dbVedasf.create
+      tags:
+        - dbvedasf
+      summary: Create a veda db
+      description: Create a new db
+      parameters:
+        - name: vedafile
+          in: body
+          description: vedafile to create veda db
+          schema:
+            type: object
+            properties:
+              myvdfile:
+                type: string
+                description: path of VD file
+  
+              myvdefile:
+                type: string
+                description: path of VDE file
+ 
+              myvdsfile:
+                type: string
+                description: path of VDS file
+
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+#
+
+#start schluder
+  /dbVedasf/{jobid}:
+    get:
+      operationId: dbVedasf.getJobStatus
+      tags:
+        - dbVedasf
+      summary:  Get job status
+      description:  Get job status
+      parameters:
+        - name: jobid
+          in: path
+          description: jobid
+          type: string
+          required: True
+      responses:
+        201:
+          description: Successfully veda db created
+          schema:
+            properties:
+              status:
+                type: string
+                description: Job status
+# #end schulder
+#   #start schluder
+#   /clock/{jobid}:
+#     get:
+#       operationId: clock.getJobStatus
+#       tags:
+#         - dbVedasf
+#       summary:  Get job status
+#       description:  Get job status
+#       parameters:
+#         - name: jobid
+#           in: path
+#           description: jobid
+#           type: string
+#           required: True
+#       responses:
+#         201:
+#           description: Successfully veda db created
+#           schema:
+#             properties:
+#               status:
+#                 type: string
+#                 description: Job status
+#   #end schulder
+
+# queue
+  /dbvedasf/CreatedByqueue:
+    post:
+      operationId: dbVedasf.CreateByqueue
+      tags:
+        - dbvedasf
+      summary: Create a veda db
+      description: Create a new db
+      parameters:
+        - name: vedafile
+          in: body
+          description: vedafile to create veda db
+          schema:
+            type: object
+            properties:
+              myvdfile:
+                type: string
+                description: path of VD file
+
+              myvdefile:
+                type: string
+                description: path of VDE file
+
+              myvdsfile:
+                type: string
+                description: path of VDS file
+
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              job_id:
+                type: string
+                description: Id of import
+
+
+# queue for exiting DB
+  /dbvedasf/CreatedToexitingDbByqueue:
+    post:
+      operationId: dbVedasf.createToexitingDbByqueue
+      tags:
+        - dbvedasf
+      summary: Load in a db
+      description: Load in a db
+      parameters:
+        - name: vedafile
+          in: body
+          description: vedafile to Load in a db
+          schema:
+            type: object
+            properties:
+              myvdfile:
+                type: string
+                description: path of VD file
+
+              myvdefile:
+                type: string
+                description: path of VDE file
+
+              myvdsfile:
+                type: string
+                description: path of VDS file
+
+      responses:
+        200:
+          description: Successfully Load in a db
+          schema:
+            properties:
+              job_id:
+                type: string
+                description: Id of import
+  #
+#
+
+#
+  /dbvedasf/ToexitingDb:
+    post:
+      operationId: dbVedasf.createToexitingDb
+      tags:
+        - dbvedasf
+      summary: Load in a db
+      description: Load in a db
+      parameters:
+        - name: vedafile
+          in: body
+          description: vedafile to Load in a db
+          schema:
+            type: object
+            properties:
+              myvdfile:
+                type: string
+                description: path of VD file
+
+              myvdefile:
+                type: string
+                description: path of VDE file
+
+              myvdsfile:
+                type: string
+                description: path of VDS file
+
+      responses:
+        200:
+          description: Successfully Load in a db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+#
+  /dbvedasf/{importID}:
+    post:
+      operationId: dbVedasf.createfromexitingDb
+      tags:
+        - dbvedasf
+      summary:  Importer les résultats dans une base de données existantes
+      description:  Importer les résultats dans une base de données existantes
+      parameters:
+        - name: importID
+          in: path
+          description: importID
+          type: string
+          required: True
+        - name: vedafile
+          in: body
+          description: vedafile to create db
+          required: True
+          schema:
+            type: object
+            properties:
+              myvdfile:
+                type: string
+                description: path of VD file
+              myvdefile:
+                type: string
+                description: path of VDE file
+              myvdsfile:
+                type: string
+                description: path of VDS file
+      responses:
+        201:
+          description: Successfully veda db created
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+
+  /dimensioncontent:
+    get:
+      operationId: dimensioncontent.read_all
+      tags:
+        - dimensioncontent
+      summary: Read the dimensioncontent
+      description: Read the dimensioncontent
+      responses:
+        200:
+          description: Successfully read dimensioncontent
+          schema:
+            type: array
+            items:
+              properties:
+                iddimensioncontent:
+                  type: integer
+                  description: Id dimension content
+                dimensioncode:
+                  type: string
+                  description: dimension code
+                region:
+                  type: string
+                  description: region code
+                codeset:
+                  type: string
+                  description: Id code set
+                typedimension:
+                  type: string
+                  description: type dimension
+                descriptiondimensioncode:
+                  type: string
+                  description: description of code set
+                idset:
+                  type: string
+                  description: id of  set
+                importid:
+                  type: string
+                  description: Id of import
+
+  /dimensioncontent/{idset}:
+    get:
+      operationId: dimensioncontent.read_dimensionContentbySet
+      tags:
+        - dimensioncontent
+      summary: Read dimensioncontent by Set Id
+      description: Read dimensioncontent by Set Id
+      parameters:
+        - name: idset
+          in: path
+          description: Id of set associated with Dimension Content
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read dimensioncontent by Set Id
+          schema:
+            type: array
+            items:
+              properties:
+                iddimensioncontent:
+                  type: integer
+                  description: Id dimension content
+                dimensioncode:
+                  type: string
+                  description: dimension code
+                region:
+                  type: string
+                  description: region code
+                codeset:
+                  type: string
+                  description: Id code set
+                typedimension:
+                  type: string
+                  description: type dimension
+                descriptiondimensioncode:
+                  type: string
+                  description: description of code set
+                idset:
+                  type: string
+                  description: id of  set
+                importid:
+                  type: string
+                  description: Id of import
+                typedimensionset:
+                  type: string
+                  description: dimension of set
+                description:
+                  type: string
+                  description: set description 
+
+  /resultat:
+    get:
+      operationId: resultat.read_AllResultat
+      tags:
+        - resultat
+      summary: Read the resultat
+      description: Read the resultat
+      responses:
+        200:
+          description: Successfully read resultat
+          schema:
+            type: array
+            items:
+              properties:
+                resultid:
+                  type: integer
+                  description: Id resultid
+                attribut:
+                  type: string
+                  description: attribut code
+                commodity:
+                  type: string
+                  description: commodity code
+                process:
+                  type: string
+                  description: process code 
+                periode:
+                  type: string
+                  description: periode
+                region:
+                  type: string
+                  description: region
+                vintage:
+                  type: string
+                  description: vintage
+                timeslice:
+                  type: string
+                  description: timeslice
+                userconstraint:
+                  type: string
+                  description: userconstraint
+                pv:
+                  type: string
+                  description: pv
+                importid:
+                  type: string
+                  description: timeslice
+
+  /entete:
+    get:
+      operationId: entete.read_entete
+      tags:
+        - entete
+      summary: Read the entete of import file
+      description: Read the entete of import file
+      responses:
+        200:
+          description: Successfully read entete
+          schema:
+            type: object
+            properties:
+              importid:
+                type: integer
+                description: Import key (primary key)
+              importidveda:
+                type: string
+                description: import id veda 
+              gdx2vedaversion:
+                type: string
+                description: gdx2vedaversion (pilote version)
+              vedaflavor:
+                type: string
+                description: vedaflavor 
+              dimensions:
+                type: string
+                description: dimensions
+              parentdimensions:
+                type: string
+                description: parentdimensions
+              UserConstraint:
+                type: string
+                description: UserConstraint
+              setallowed:
+                type: string
+                description: setallowed
+              fieldsize:
+                type: string
+                description: fieldsize
+              NotIndexed:
+                type: string
+                description: NotIndexed
+              ValueDim:
+                type: string
+                description: ValueDim
+              DefaultValueDim:
+                type: string
+                description: fieldsize
+              FieldSeparator:
+                type: string
+                description: NotIndexed
+              TextDelim:
+                type: string
+                description: ValueDim
+  /set:
+    get:
+      operationId: set.read_AllSet
+      tags:
+        - set
+      summary: Read the set
+      description: Read the set
+      responses:
+        200:
+          description: Successfully read set
+          schema:
+            type: array
+            items:
+              properties:
+                idset:
+                  type: integer
+                  description: Id of set
+                typedimensionset:
+                  type: string
+                  description: dimension of set
+                region:
+                  type: string
+                  description: region
+                codeset:
+                  type: string
+                  description: code of set
+                description:
+                  type: string
+                  description: description of code set
+                importid:
+                  type: string
+                  description: import id
+                
+
+  /search:
+    post:
+      operationId: search.read_Search_result
+      tags:
+        - search
+      summary:  Importer les résultats dans une base de données existantes
+      description:  Importer les résultats dans une base de données existantes
+      parameters:
+        - name: st
+          in: body
+          description: vedafile to create db
+          required: True
+          schema:
+            type: object
+            properties:
+              commodity:
+                type: array
+                items:
+                  type: string
+                description: path of VDS file
+              process:
+                type: array
+                items:
+                  type: string
+                description: path of VDS file
+      responses:
+        200:
+          description: Successfully read dimensioncontent
+          schema:
+            type: array
+            items:
+              properties:
+                attribut:
+                  type: string
+                  description: attribut 
+                commodity:
+                  type: string
+                  description: commodity
+                importid:
+                  type: string
+                  description: Import ID
+                periode:
+                  type: string
+                  description: periode
+                process:
+                  type: string
+                  description: process
+                pv:
+                  type: string
+                  description: pv
+                region:
+                  type: string
+                  description: region
+                resultid:
+                  type: string
+                  description: result id
+                timeslice:
+                  type: string
+                  description: time slice
+                userconstraint:
+                  type: string
+                  description: user constraint
+                vintage:
+                  type: string
+                  description: vintage
+
+  /searchUpload:
+    post:
+      operationId: search.get_image
+      tags:
+        - search
+      summary:  Importer les résultats dans une base de données existantes
+      description:  Importer les résultats dans une base de données 
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: upfile
+          type: file
+          description: The file to upload.
+
+      responses:
+        200:
+          description: Successfully read dimensioncontent
+          schema:
+            type: array
+            items:
+              properties:
+                attribut:
+                  type: string
+                  description: attribut 
+#
+  /searchUpload/delete:
+    post:
+      operationId: search.deletefile
+      tags:
+        - search
+      summary:  Delete all upload file after db is done 
+      description:   Delete all upload file after db is done
+      responses:
+        200:
+          description: Deleted Successfully
+          schema:
+            properties:
+              result:
+                type: string
+                description: Result operation
+#
+  /searchProcessCommodity/{st}:
+    get:
+      operationId: search.getAttributProcessEndCommodity
+      tags:
+        - search
+      summary:  Permet de recuperer les process, les commodity
+      description:  Importer les résultats dans une base de données existantes
+      parameters:
+        - name: st
+          in: path
+          description: importID
+          type: string
+          required: True
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+        
+  /searchAttributVintagePeriode/{st}:
+    get:
+      operationId: search.getOtherResultatFiled
+      tags:
+        - search
+      summary:  Permet de recuperer les periode, timesilce
+      description:  Importer les résultats dans une base de données existantes
+      parameters:
+        - name: st
+          in: path
+          description: importID
+          type: string
+          required: True
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+              
+  /searchSet/{st}:
+    get:
+      operationId: search.getSET
+      tags:
+        - search
+      summary:  Permet de recuperer les periode, timesilce
+      description:  Importer les résultats dans une base de données existantes
+      parameters:
+        - name: st
+          in: path
+          description: importID
+          type: string
+          required: True
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+
+  /searchscenario/{st}:
+    get:
+      operationId: search.getScenario
+      tags:
+        - search
+      summary:  Permet de recuperer le scenario
+      description:  Importer les résultats dans une base de données existantes
+      parameters:
+        - name: st
+          in: path
+          description: importID
+          type: string
+          required: True
+      responses:
+        201:
+          description: Successfully created veda db
+          schema:
+            properties:
+              import_id:
+                type: string
+                description: Id of import
+#path
+  /path:
+    get:
+      operationId: mypath.path
+      tags:
+        - mypath
+      summary:  get file path
+      description:  get file path
+      responses:
+        200:
+          description: Successfully
+          schema:
+            properties:
+              path:
+                type: string
+                description: attribut 
