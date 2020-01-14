@@ -1,8 +1,4 @@
-
-
-
-
-        {
+ {
             "dbuser":"postgres",
             "dbpass":"79085c00814398f846b5a5ab1bc24c16",
             "dbserver":"dokku-postgres-esvdatabase",
