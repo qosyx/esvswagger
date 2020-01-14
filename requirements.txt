@@ -1,6 +1,5 @@
 boto
 FileChunkIO
-PyGreSQL
 simplejson
 flask_cors
 pandas
