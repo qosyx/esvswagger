@@ -14,7 +14,7 @@ def createTable(db):
     # db.query("DROP DATABASE IF EXISTS veda")
     # db.query("create database veda")
 
-    db.query("TRUNCATE TABLE entete,template,set,dimensioncontent,vedatable,vedatablecontent,resultat")
+    db.query("truncate TABLE  entete CASCADE")
      #entete
     db.query("create table if not exists entete "
     "(importid serial primary key, importidveda varchar, gdx2vedaversion varchar, "
