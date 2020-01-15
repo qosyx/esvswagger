@@ -1,7 +1,7 @@
  {
-            "dbuser":"postgres",
-            "dbpass":"79085c00814398f846b5a5ab1bc24c16",
-            "dbserver":"dokku-postgres-esvdatabase",
-            "dbname":"esvdatabase",
+            "dbuser":"uxqiixhkfjvvek",
+            "dbpass":"784c96c33944b7a7b0098dde6bc36061aa67add55e923a2d53808d46d0e2fe00",
+            "dbserver":"ec2-54-174-229-152.compute-1.amazonaws.com",
+            "dbname":"d5gfede64e6ib4",
             "dbport":5432
         }
