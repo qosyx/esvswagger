@@ -12,10 +12,11 @@ import os
 
 # create the application instance
 app = connexion.App(__name__, specification_dir="./")
+CORS(app.app)
+# CORS(app.app, resources={r"*": {"origins": "*"}})
 # Cead the swagger.yml file to configure the endpoints
 app.add_api("swagger.yml")
-CORS(app.app)
-# CORS(app.app, resources={r"/api/*": {"origins": "*"}})
+# CORS(app.app)
 # Create a URL route in our application for "/"
 @app.route("/")
 def home():

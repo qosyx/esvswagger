@@ -33,7 +33,7 @@ def deletefile():
     return result
 
 def get_image():
-
+    # print(request)
     UPLOAD_FOLDER=str(mypath.pathForFile)
     print(UPLOAD_FOLDER)
     app = Flask(__name__)
