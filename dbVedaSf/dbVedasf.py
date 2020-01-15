@@ -24,7 +24,15 @@ def getJobStatus(jobid):
     """
     job = Job.fetch(jobid, connection=conn)
     return job.get_status()
+
+def createmyq(vedafile):
     
+    # q = Queue('high', connection=conn)
+    q = Queue('high', connection=conn)
+    job = q.enqueue(vedadb.entete.execution,path,vedafile.get("myvdfile"))
+
+    return job.get_id()
+
 def CreateByqueue(vedafile):
     """
     Create database by use queue
