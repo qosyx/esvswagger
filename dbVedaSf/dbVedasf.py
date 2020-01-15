@@ -52,6 +52,7 @@ def createToexitingDbByqueue(vedafile):
     return job.get_id()
 
 def create(vedafile):
+
     vedadb.tableCreated.execution(path)
     vedadb.entete.execution(path,vedafile.get("myvdfile"))
     vedadb.sets.execution(path,vedafile.get("myvdefile"))
