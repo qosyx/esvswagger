@@ -1,6 +1,7 @@
-{
-    "dbuser":"postgres",
-    "dbpass":"postgres",
-    "dbserver":"127.0.0.1",
-    "dbname":"veda",
-    "dbport":5432}
+  {
+        "dbuser":"orvjnwnr",
+        "dbpass":"wBa4SJQADTUxGt564F05dOWpNskGcxju",
+        "dbserver":"rajje.db.elephantsql.com",
+        "dbname":"orvjnwnr",
+        "dbport":5432
+    }
