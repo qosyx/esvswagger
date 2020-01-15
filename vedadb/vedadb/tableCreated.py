@@ -10,7 +10,7 @@ def allTable(db):
     return db.get_tables()
 #Creation des tables 
 def createTable(db):
-    db.query("TRUNCATE TABLE entete,template,set,dimensioncontent,vedatable,vedatablecontent,resultat")
+    # db.query("TRUNCATE TABLE entete,template,set,dimensioncontent,vedatable,vedatablecontent,resultat")
      #entete
     db.query("create table if not exists entete "
     "(importid serial primary key, importidveda varchar, gdx2vedaversion varchar, "
